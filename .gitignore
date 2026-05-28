@@ -1,0 +1,43 @@
+# Build artifacts
+build/
+.pio/
+__pycache__/
+*.o
+*.elf
+*.bin
+*.hex
+
+# IDE files
+.vscode/
+.idea/
+*.code-workspace
+
+# macOS
+.DS_Store
+Thumbs.db
+
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# Python
+*.pyc
+venv/
+.env
+
+# Secrets (WiFi credentials, MAC addresses for your specific hardware)
+secrets.h
+credentials.h
+
+# Machine-local environment config
+.env.local
+
+# Large binary files (commit CAD source, not generated mesh files)
+# Use GitHub Releases for pre-built STL distribution
+*.stl
+*.3mf
+*.gcode
+
+# Max for Live autosave
+*.amxd~
