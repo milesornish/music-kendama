@@ -2,13 +2,13 @@
 
 An open-source stringless jumbo kendama with embedded IMU sensors, addressable LEDs, and wireless OSC communication for real-time musical performance control in Ableton Live.
 
-**Status:** Active development — architecture locked, firmware in progress.
+**Status:** Active development — architecture is a working draft (unlocked); wireless core bring-up validated on hardware.
 
 Built in collaboration with [Claude](https://claude.ai) by Anthropic.
 
 ## What Is This?
 
-A 8.35" jumbo kendama with an LSM6DSV16X IMU and APA102 DotStar LEDs in both the ken and tama. Motion data streams wirelessly via ESP-NOW to a USB receiver, through a compiled SLIP-OSC bridge, and into Ableton Live via Max for Live — all within a few ms, if possible. No MIDI anywhere. No WiFi router. Touchdesigner off the primary signal path.
+A 8.35" jumbo kendama with an LSM6DSV16X IMU and APA102 DotStar LEDs in both the ken and tama. Motion data streams wirelessly via ESP-NOW to a USB receiver, through a compiled SLIP-OSC bridge, and into Ableton Live via Max for Live — all within a few ms, if possible. No MIDI anywhere. No WiFi router. TouchDesigner is kept off the primary signal path — available only as an optional passive, off-path visualizer (via the bridge's `:9500` debug tap).
 
 The kendama becomes a musical instrument: tilt controls filter sweeps, spin drives arpeggiation, spikes trigger samples, and the LEDs react to both motion and music in real time.
 
@@ -18,12 +18,12 @@ The kendama becomes a musical instrument: tilt controls filter sweeps, spin driv
 
 | Component | Status |
 |-----------|--------|
-| System architecture | Working version v1.2 |
+| System architecture | 🔄 Working draft (v1.2) |
 | SLIP-OSC bridge | ⬜ Not started |
 | Receiver firmware | ⬜ Not started |
 | Instrument firmware | ⬜ Not started |
 | Max for Live device | ⬜ Not started |
-| Class B prototypes A | B | C | D | ⬜ Not started |
+| Class B prototypes (A–D) | ⬜ Not started |
 | CAD | ⬜ Not started |
 | 3D printing | ⬜ Not started |
 
@@ -81,7 +81,7 @@ music-kendama/
 
 ## Building
 
-Each component has its own build instructions in its directory README. Firmware uses PlatformIO. The bridge uses Make. CAD uses OpenSCAD with a GUI CAD software TBD.
+Each component has its own build instructions in its directory README. Firmware uses PlatformIO. The bridge uses Make. CAD uses OpenSCAD (GUI CAD tool TBD).
 
 ### Quick Start (firmware)
 

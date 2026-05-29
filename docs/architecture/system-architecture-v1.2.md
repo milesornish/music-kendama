@@ -1,5 +1,13 @@
 # Music Kendama — System Architecture v1.2
 
+**Status: working draft — unlocked 2026-05-28.** Previously LOCKED (2026-05-27); unlocked after the first hardware bench validation (see [`wireless-validation-2026-05-28.md`](wireless-validation-2026-05-28.md)). Decisions below are the current best plan, revised against hardware findings — not frozen.
+
+**Changelog (2026-05-28):**
+
+- Unlocked from LOCKED status — the spec is now a living working draft, revised against hardware findings.
+- **TouchDesigner reframed:** removed from the **primary signal chain**, but retained as an optional **passive, off-path visualizer** on the `:9500` debug tap (consistent with §5). Not "removed entirely."
+- **Bench finding:** single-chip dual USB-CDC is **not** available on stock Arduino-ESP32 2.0.x; a **two-receiver topology** (split by direction) is a validated alternative. Receiver firmware framework TBD (two-receiver / ESP-IDF / Arduino-3.x).
+
 **Changelog from v1.1:**
 
 - Added debug broadcast port (localhost:9500) to compiled bridge spec — zero-cost passive diagnostic tap for any external visualization tool. Not a system dependency.
@@ -7,7 +15,7 @@
 
 **Changelog from v1.0:**
 
-- Removed TouchDesigner from the architecture entirely — all LED control handled by firmware and Max for Live.
+- Removed TouchDesigner from the primary signal chain — all LED control handled by firmware and Max for Live. (TouchDesigner remains available only as an optional passive, off-path visualizer on the :9500 debug tap.)
 - Replaced Python bridge with compiled C bridge (primary) or direct M4L serial read; Python demoted to dev/debug tool.
 - Specified dual USB-CDC serial ports on receiver (upstream sensor data, downstream LED commands) to eliminate bidirectional traffic contention.
 - Added complete power budget with firmware current capping.
@@ -21,7 +29,7 @@
 
 A stringless jumbo kendama (25cm ken, 93mm tama) with embedded IMU sensors, addressable LEDs, and wireless OSC communication for real-time musical performance control in Ableton Live via Max for Live. The system uses ESP-NOW for all wireless communication, OSC as the sole data protocol at every layer, and a hardwired USB receiver bridging to the laptop.
 
-**No MIDI anywhere. No TouchDesigner. No dedicated WiFi router.**
+**No MIDI anywhere. No TouchDesigner on the primary signal path. No dedicated WiFi router.**
 
 **Performance software stack: Ableton Live. That's it.** Everything else is firmware.
 
@@ -122,7 +130,7 @@ The receiver presents as a **USB-CDC composite device with two virtual serial po
 
 ---
 
-## 6. Hardware Bill of Materials 
+## 6. Hardware Bill of Materials
 
 ### Microcontrollers: ESP32-S3 × 3
 
@@ -267,7 +275,7 @@ This preserves color ratios (hue stays the same) while enforcing a hard current 
 
 ---
 
-## 8. Latency Budget (Locked Targets)
+## 8. Latency Budget (Targets)
 
 ### Discrete Gesture Events (Spike → Sample Trigger)
 
@@ -370,9 +378,9 @@ When multiple layers are active, higher-priority layers override lower-priority 
 - **Blend mode (configurable):** Layer 1 is alpha-composited over Layer 0/0.5, allowing local reactive effects to show through music-reactive patterns.
 - **Fallback:** If Layer 1 data stops arriving (M4L disconnected), firmware falls back to Layer 0.5 (if receiver is coordinating) or Layer 0 (always available).
 
-### Why Not TouchDesigner
+### Why TouchDesigner Is Off the Primary Signal Path
 
-TD was previously designated for "complex generative LED visuals." This role is eliminated because:
+TD was previously designated for "complex generative LED visuals." That role is removed from the primary signal chain (TD remains available only as an optional passive, off-path visualizer — binding the bridge's :9500 debug tap, see §5). It is off the primary path because:
 
 - The LED output is 60 discrete RGB values on a 1D strip, not a 4K projection surface. The "visual complexity" required is color interpolation, sine functions, and lookup tables — trivially handled by M4L's `[js]` or `[gen~]` objects, or by firmware directly.
 - TD's 60 fps cook-frame buffer would have been the slowest LED source in the system (16.67 ms worst-case). M4L runs at audio buffer rate (~1,500 Hz). Firmware runs at 500+ Hz.
@@ -521,13 +529,13 @@ Reduce SPI clock from 8 MHz to 4 MHz or 2 MHz. Frame time increases from 0.15 ms
 | LSM6DSV16X as sole IMU | Onboard SFLP/FSM/MLC/Qvar eliminates ESP32 firmware complexity | Dual-IMU with ISM330DHCX (marginal precision gain, double complexity) |
 | APA102 DotStar over WS2812B NeoPixel | SPI (non-timing-critical), 20 kHz PWM, no interrupt conflicts | WS2812B (single-wire timing-critical, 400 Hz PWM, interrupt conflicts with ESP-NOW) |
 | Parallel clients over serial daisy-chain | Failure isolation, no serialization dependency, simpler firmware | Daisy-chain (correlated failures, +1.7 ms avg latency, firmware complexity) |
-| No TouchDesigner | M4L handles audio-reactive LEDs natively; receiver handles cross-device coordination; one less application | TD (60 fps cook bottleneck, extra app to manage, unnecessary for 60-LED 1D strip) |
+| TouchDesigner off the primary signal path (optional :9500 visualizer only) | M4L handles audio-reactive LEDs natively; receiver handles cross-device coordination; one less app in the critical path | TD in the primary chain (60 fps cook bottleneck, extra app to manage, unnecessary for 60-LED 1D strip) |
 | Priority-layered LED control | Graceful degradation (local → coordinated → music-reactive), sub-ms base response | Single-source LED control (fragile, no fallback, unnecessary latency for simple effects) |
 | Firmware LED current capping | Prevents LiPo over-discharge, wiring damage, and thermal issues | No cap (dangerous: 3.6A theoretical max exceeds safe battery/wiring limits) |
 
 ---
 
 *Document Version: 1.2*
-*Locked: May 27, 2026*
+*Working draft — unlocked 2026-05-28 (initially locked 2026-05-27).*
 *Author: Architecture audit collaboration (human + Claude)*
 *Next: Part 2 — Firmware architecture, LSM6DSV16X SFLP/FSM configuration, ESP-NOW packet structure, SLIP-OSC serial protocol, compiled bridge implementation*
