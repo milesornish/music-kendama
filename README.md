@@ -8,7 +8,7 @@ Built in collaboration with [Claude](https://claude.ai) by Anthropic.
 
 ## What Is This?
 
-A 25cm jumbo kendama (1.48× scaled Terra Prefect geometry) with an LSM6DSV16X IMU and APA102 DotStar LEDs in both the ken and tama. Motion data streams wirelessly via ESP-NOW to a USB receiver, through a compiled SLIP-OSC bridge, and into Ableton Live via Max for Live — all in under 2ms. No MIDI anywhere. No WiFi router. No TouchDesigner in the signal chain.
+A 8.35" jumbo kendama with an LSM6DSV16X IMU and APA102 DotStar LEDs in both the ken and tama. Motion data streams wirelessly via ESP-NOW to a USB receiver, through a compiled SLIP-OSC bridge, and into Ableton Live via Max for Live — all within a few ms, if possible. No MIDI anywhere. No WiFi router. Touchdesigner off the primary signal path.
 
 The kendama becomes a musical instrument: tilt controls filter sweeps, spin drives arpeggiation, spikes trigger samples, and the LEDs react to both motion and music in real time.
 
@@ -18,11 +18,12 @@ The kendama becomes a musical instrument: tilt controls filter sweeps, spin driv
 
 | Component | Status |
 |-----------|--------|
-| System architecture | ✅ Locked (v1.2) |
+| System architecture | Working version v1.2 |
 | SLIP-OSC bridge | ⬜ Not started |
 | Receiver firmware | ⬜ Not started |
 | Instrument firmware | ⬜ Not started |
 | Max for Live device | ⬜ Not started |
+| Class B prototypes A | B | C | D | ⬜ Not started |
 | CAD | ⬜ Not started |
 | 3D printing | ⬜ Not started |
 
@@ -80,7 +81,7 @@ music-kendama/
 
 ## Building
 
-Each component has its own build instructions in its directory README. Firmware uses PlatformIO. The bridge uses Make. CAD uses OpenSCAD.
+Each component has its own build instructions in its directory README. Firmware uses PlatformIO. The bridge uses Make. CAD uses OpenSCAD with a GUI CAD software TBD.
 
 ### Quick Start (firmware)
 
