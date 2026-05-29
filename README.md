@@ -8,7 +8,7 @@ Built in collaboration with [Claude](https://claude.ai) by Anthropic.
 
 ## What Is This?
 
-A 8.35" jumbo kendama with an LSM6DSV16X IMU and APA102 DotStar LEDs in both the ken and tama. Motion data streams wirelessly via ESP-NOW to a USB receiver, through a compiled SLIP-OSC bridge, and into Ableton Live via Max for Live — all within a few ms, if possible. No MIDI anywhere. No WiFi router. TouchDesigner is kept off the primary signal path — available only as an optional passive, off-path visualizer (via the bridge's `:9500` debug tap).
+A jumbo kendama (235 mm overall, 212 mm ken, 80 mm tama) with an LSM6DSV16X IMU and APA102 DotStar LEDs in both the ken and tama. Motion data streams wirelessly via ESP-NOW to a USB receiver, through a compiled SLIP-OSC bridge, and into Ableton Live via Max for Live — all within a few ms, if possible. No MIDI anywhere. No WiFi router. TouchDesigner is kept off the primary signal path — available only as an optional passive, off-path visualizer (via the bridge's `:9500` debug tap).
 
 The kendama becomes a musical instrument: tilt controls filter sweeps, spin drives arpeggiation, spikes trigger samples, and the LEDs react to both motion and music in real time.
 

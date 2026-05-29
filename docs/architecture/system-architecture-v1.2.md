@@ -27,7 +27,7 @@
 
 ## 1. Architecture Summary
 
-A stringless jumbo kendama (25cm ken, 93mm tama) with embedded IMU sensors, addressable LEDs, and wireless OSC communication for real-time musical performance control in Ableton Live via Max for Live. The system uses ESP-NOW for all wireless communication, OSC as the sole data protocol at every layer, and a hardwired USB receiver bridging to the laptop.
+A stringless jumbo kendama (235 mm overall; 212 mm ken, 80 mm tama) with embedded IMU sensors, addressable LEDs, and wireless OSC communication for real-time musical performance control in Ableton Live via Max for Live. The system uses ESP-NOW for all wireless communication, OSC as the sole data protocol at every layer, and a hardwired USB receiver bridging to the laptop.
 
 **No MIDI anywhere. No TouchDesigner on the primary signal path. No dedicated WiFi router.**
 
@@ -170,7 +170,7 @@ The LSM6DSV16X is not just a sensor — it's a sensor with an embedded processin
 **Why not dual-IMU (LSM6DSV16X + ISM330DHCX) in the tama:**
 
 - The ISM330DHCX's noise floor advantage (~15% lower noise density) is irrelevant for distinguishing impact events that differ by orders of magnitude in g-force.
-- Adding a second I2C device doubles bus traffic, adds firmware complexity, increases power draw, and consumes physical space inside a 93mm hemisphere.
+- Adding a second I2C device doubles bus traffic, adds firmware complexity, increases power draw, and consumes physical space inside an 80mm tama hemisphere.
 - The ISM330DHCX has no onboard gesture detection — adding it would reintroduce the firmware polling loop that the LSM6DSV16X's FSM eliminates.
 
 ### ISM330DHCX × 4: All Spares
