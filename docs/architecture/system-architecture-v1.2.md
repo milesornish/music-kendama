@@ -1,7 +1,4 @@
-# Music Kendama — System Architecture v1.2 (Locked)
-
-*Finalized architecture decisions from the Part 1 Phased Architectural Audit.*
-*Status: **LOCKED** — All decisions below are committed unless testing reveals a specific, documented failure.*
+# Music Kendama — System Architecture v1.2
 
 **Changelog from v1.1:**
 
@@ -125,7 +122,7 @@ The receiver presents as a **USB-CDC composite device with two virtual serial po
 
 ---
 
-## 6. Hardware Bill of Materials (Locked Allocations)
+## 6. Hardware Bill of Materials 
 
 ### Microcontrollers: ESP32-S3 × 3
 
