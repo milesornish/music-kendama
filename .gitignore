@@ -7,6 +7,9 @@ __pycache__/
 *.bin
 *.hex
 
+# Compiled bridge binary (machine-local; see CLAUDE.md — never syncs)
+bridge/music-kendama-bridge
+
 # IDE files
 .vscode/
 .idea/
