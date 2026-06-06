@@ -78,6 +78,26 @@ default** (~720/s, lossless to ~4 m through a wall) is 3–5× over that. **Batc
 throughput lever** (same PHY rate, bigger frames). **Raising the PHY rate is NOT usable** at playing
 distance — its big throughput gains evaporate past ~1 m.
 
+## LED update rate vs DotStar PWM (and POV) — design note
+Two distinct rates, easy to conflate:
+- **Color update rate** (Layer 1, M4L over ESP-NOW, ~100 Hz): how fast the glow *reacts* to
+  motion. Bounded by the ~700 Hz down-path ceiling; ~100 Hz is responsive and in budget.
+- **DotStar PWM rate (20 kHz, in-chip)**: how a *set* color renders. This — not the update
+  rate — is what keeps the strip flicker-/band-free when the kendama is **thrown or spinning**
+  (NeoPixel's 400 Hz visibly strobes in motion; DotStar's 20 kHz does not). Free + automatic;
+  the reason DotStar is the right choice for a moving instrument.
+- DotStar data path: 2-wire SPI up to 32 MHz, 24-bit colour; a 24–36-LED ring is a sub-ms
+  frame, so the strip is never the throughput bottleneck — the ESP-NOW down-path is.
+
+**POV / spin-synced patterns = Layer 0, not the network.** Painting a spatial image that stays
+fixed in the air as the strip rotates needs kHz-rate per-LED updates tightly synced to spin
+angle (local gyro). That must run in **instrument firmware (Layer 0, 500+ Hz, driving the
+DotStar's full SPI directly)** — *not* over ESP-NOW (too slow/laggy). The DotStar specs make it
+feasible; deferred until the motion-reactive Layer-1 path is solid.
+
+Strip in hand: 2× Adafruit DotStar 144 LED/m white, 1 m each (cut to ring size). 5 V parts; off
+BAT (~3.7–4.2 V) they run dimmer / slightly colour-shifted — a 5 V boost is the eventual fix.
+
 ## NOT yet validated (the asterisks)
 - **Range / RF robustness** — the PHY-rate tradeoff is now *measured* (see above: 54 Mbps dead past
   ~1 m; 1 Mbps clean to ~4 m through a wall). Still untested: **1 Mbps's actual max range** (>4 m, not

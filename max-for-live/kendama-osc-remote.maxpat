@@ -14,7 +14,8 @@
 			{ "box" : { "id" : "obj-6", "maxclass" : "newobj", "text" : "* 0.05", "numinlets" : 2, "numoutlets" : 1, "outlettype" : [ "" ], "patching_rect" : [ 240.0, 170.0, 50.0, 22.0 ] } },
 			{ "box" : { "id" : "obj-7", "maxclass" : "newobj", "text" : "+ 0.5", "numinlets" : 2, "numoutlets" : 1, "outlettype" : [ "" ], "patching_rect" : [ 240.0, 210.0, 50.0, 22.0 ] } },
 			{ "box" : { "id" : "obj-8", "maxclass" : "newobj", "text" : "clip 0. 1.", "numinlets" : 3, "numoutlets" : 1, "outlettype" : [ "float" ], "patching_rect" : [ 240.0, 250.0, 65.0, 22.0 ] } },
-			{ "box" : { "id" : "obj-9", "maxclass" : "newobj", "text" : "sig~", "numinlets" : 1, "numoutlets" : 1, "outlettype" : [ "signal" ], "patching_rect" : [ 240.0, 300.0, 45.0, 22.0 ] } },
+			{ "box" : { "id" : "obj-9", "maxclass" : "newobj", "text" : "line~", "numinlets" : 2, "numoutlets" : 1, "outlettype" : [ "signal" ], "patching_rect" : [ 240.0, 300.0, 50.0, 22.0 ] } },
+			{ "box" : { "id" : "obj-34", "maxclass" : "newobj", "text" : "pack 0. 20", "numinlets" : 2, "numoutlets" : 1, "outlettype" : [ "" ], "patching_rect" : [ 330.0, 275.0, 75.0, 22.0 ] } },
 			{ "box" : { "id" : "obj-10", "maxclass" : "newobj", "text" : "live.remote~ @normalized 1", "numinlets" : 2, "numoutlets" : 0, "patching_rect" : [ 240.0, 350.0, 170.0, 22.0 ] } },
 			{ "box" : { "id" : "obj-11", "maxclass" : "message", "text" : "1", "numinlets" : 2, "numoutlets" : 1, "outlettype" : [ "" ], "patching_rect" : [ 470.0, 300.0, 30.0, 22.0 ] } },
 			{ "box" : { "id" : "obj-12", "maxclass" : "newobj", "text" : "live.map", "numinlets" : 1, "numoutlets" : 5, "outlettype" : [ "", "", "", "", "" ], "patching_rect" : [ 470.0, 350.0, 70.0, 22.0 ] } },
@@ -31,6 +32,17 @@
 			{ "box" : { "id" : "obj-22", "maxclass" : "newobj", "text" : "prepend /kendama/ken/led/rgb", "numinlets" : 1, "numoutlets" : 1, "outlettype" : [ "" ], "patching_rect" : [ 560.0, 340.0, 200.0, 22.0 ] } },
 			{ "box" : { "id" : "obj-23", "maxclass" : "newobj", "text" : "udpsend 127.0.0.1 9001", "numinlets" : 1, "numoutlets" : 0, "patching_rect" : [ 560.0, 380.0, 160.0, 22.0 ] } },
 
+			{ "box" : { "id" : "obj-24", "maxclass" : "newobj", "text" : "pow 2.", "numinlets" : 2, "numoutlets" : 1, "outlettype" : [ "" ], "patching_rect" : [ 200.0, 480.0, 50.0, 22.0 ] } },
+			{ "box" : { "id" : "obj-25", "maxclass" : "newobj", "text" : "pow 2.", "numinlets" : 2, "numoutlets" : 1, "outlettype" : [ "" ], "patching_rect" : [ 300.0, 480.0, 50.0, 22.0 ] } },
+			{ "box" : { "id" : "obj-26", "maxclass" : "newobj", "text" : "pow 2.", "numinlets" : 2, "numoutlets" : 1, "outlettype" : [ "" ], "patching_rect" : [ 400.0, 480.0, 50.0, 22.0 ] } },
+			{ "box" : { "id" : "obj-27", "maxclass" : "newobj", "text" : "+", "numinlets" : 2, "numoutlets" : 1, "outlettype" : [ "" ], "patching_rect" : [ 200.0, 520.0, 40.0, 22.0 ] } },
+			{ "box" : { "id" : "obj-28", "maxclass" : "newobj", "text" : "+", "numinlets" : 2, "numoutlets" : 1, "outlettype" : [ "" ], "patching_rect" : [ 200.0, 560.0, 40.0, 22.0 ] } },
+			{ "box" : { "id" : "obj-29", "maxclass" : "newobj", "text" : "sqrt", "numinlets" : 1, "numoutlets" : 1, "outlettype" : [ "" ], "patching_rect" : [ 200.0, 600.0, 50.0, 22.0 ] } },
+			{ "box" : { "id" : "obj-30", "maxclass" : "newobj", "text" : "> 18.", "numinlets" : 2, "numoutlets" : 1, "outlettype" : [ "" ], "patching_rect" : [ 200.0, 640.0, 50.0, 22.0 ] } },
+			{ "box" : { "id" : "obj-31", "maxclass" : "newobj", "text" : "change", "numinlets" : 1, "numoutlets" : 1, "outlettype" : [ "" ], "patching_rect" : [ 200.0, 680.0, 60.0, 22.0 ] } },
+			{ "box" : { "id" : "obj-32", "maxclass" : "newobj", "text" : "sel 1", "numinlets" : 2, "numoutlets" : 2, "outlettype" : [ "bang", "" ], "patching_rect" : [ 200.0, 720.0, 45.0, 22.0 ] } },
+			{ "box" : { "id" : "obj-33", "maxclass" : "message", "text" : "255 255 255", "numinlets" : 2, "numoutlets" : 1, "outlettype" : [ "" ], "patching_rect" : [ 200.0, 760.0, 90.0, 22.0 ] } },
+
 			{ "box" : { "id" : "obj-c", "maxclass" : "comment", "text" : "plugin~->plugout~ passes the instrument's audio through (so the track isn't muted). udpreceive 9000 -> ken ax-tilt -> 0..1 -> sig~ -> live.remote~ (Map it to a synth param). Sound-only; LED branch added after this is confirmed.", "numinlets" : 1, "numoutlets" : 0, "patching_rect" : [ 360.0, 170.0, 250.0, 90.0 ] } }
 		],
 		"lines" : [
@@ -41,7 +53,8 @@
 			{ "patchline" : { "source" : [ "obj-5", 1 ], "destination" : [ "obj-6", 0 ] } },
 			{ "patchline" : { "source" : [ "obj-6", 0 ], "destination" : [ "obj-7", 0 ] } },
 			{ "patchline" : { "source" : [ "obj-7", 0 ], "destination" : [ "obj-8", 0 ] } },
-			{ "patchline" : { "source" : [ "obj-8", 0 ], "destination" : [ "obj-9", 0 ] } },
+			{ "patchline" : { "source" : [ "obj-8", 0 ], "destination" : [ "obj-34", 0 ] } },
+			{ "patchline" : { "source" : [ "obj-34", 0 ], "destination" : [ "obj-9", 0 ] } },
 			{ "patchline" : { "source" : [ "obj-9", 0 ], "destination" : [ "obj-10", 0 ] } },
 			{ "patchline" : { "source" : [ "obj-11", 0 ], "destination" : [ "obj-12", 0 ] } },
 			{ "patchline" : { "source" : [ "obj-12", 1 ], "destination" : [ "obj-10", 1 ] } },
@@ -57,7 +70,20 @@
 			{ "patchline" : { "source" : [ "obj-19", 0 ], "destination" : [ "obj-20", 0 ] } },
 			{ "patchline" : { "source" : [ "obj-20", 0 ], "destination" : [ "obj-21", 2 ] } },
 			{ "patchline" : { "source" : [ "obj-21", 0 ], "destination" : [ "obj-22", 0 ] } },
-			{ "patchline" : { "source" : [ "obj-22", 0 ], "destination" : [ "obj-23", 0 ] } }
+			{ "patchline" : { "source" : [ "obj-22", 0 ], "destination" : [ "obj-23", 0 ] } },
+			{ "patchline" : { "source" : [ "obj-5", 1 ], "destination" : [ "obj-24", 0 ] } },
+			{ "patchline" : { "source" : [ "obj-5", 2 ], "destination" : [ "obj-25", 0 ] } },
+			{ "patchline" : { "source" : [ "obj-5", 3 ], "destination" : [ "obj-26", 0 ] } },
+			{ "patchline" : { "source" : [ "obj-24", 0 ], "destination" : [ "obj-27", 0 ] } },
+			{ "patchline" : { "source" : [ "obj-25", 0 ], "destination" : [ "obj-27", 1 ] } },
+			{ "patchline" : { "source" : [ "obj-27", 0 ], "destination" : [ "obj-28", 0 ] } },
+			{ "patchline" : { "source" : [ "obj-26", 0 ], "destination" : [ "obj-28", 1 ] } },
+			{ "patchline" : { "source" : [ "obj-28", 0 ], "destination" : [ "obj-29", 0 ] } },
+			{ "patchline" : { "source" : [ "obj-29", 0 ], "destination" : [ "obj-30", 0 ] } },
+			{ "patchline" : { "source" : [ "obj-30", 0 ], "destination" : [ "obj-31", 0 ] } },
+			{ "patchline" : { "source" : [ "obj-31", 0 ], "destination" : [ "obj-32", 0 ] } },
+			{ "patchline" : { "source" : [ "obj-32", 0 ], "destination" : [ "obj-33", 0 ] } },
+			{ "patchline" : { "source" : [ "obj-33", 0 ], "destination" : [ "obj-22", 0 ] } }
 		]
 	}
 }
