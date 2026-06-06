@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# pre-commit — block secrets / build artifacts from entering history.
+# Installed repo-wide via:  git config --local core.hooksPath scripts/git-hooks
+set -o pipefail
+HOOK_DIR="$(cd "$(dirname "$0")" && pwd)"
+. "$HOOK_DIR/scan-lib.sh"
+
+# staged files (added / copied / modified), newline-separated (bash 3.2: no mapfile)
+files=()
+while IFS= read -r line; do [ -n "$line" ] && files+=("$line"); done \
+  < <(git diff --cached --name-only --diff-filter=ACM)
+
+if [ ${#files[@]} -gt 0 ]; then scan_filenames "${files[@]}"; fi
+
+# content scan over added lines (here-string keeps scan_content in this shell so FINDINGS persists)
+diff=$(git diff --cached -U0)
+scan_content <<<"$diff"
+
+if report_findings; then exit 0; else exit 1; fi

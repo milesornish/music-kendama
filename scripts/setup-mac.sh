@@ -113,6 +113,16 @@ install_all() {
         ok "user.email already set ($(git config --global user.email))"
     fi
 
+    # --- git hooks (secret/artifact pre-commit scanner; tracked in scripts/git-hooks) ---
+    echo "--- git hooks ---"
+    if [[ "$(git config --local core.hooksPath || true)" == "scripts/git-hooks" ]]; then
+        ok "core.hooksPath = scripts/git-hooks"
+    elif git config --local core.hooksPath scripts/git-hooks; then
+        ok "set core.hooksPath = scripts/git-hooks (secret-scan pre-commit active)"
+    else
+        warn "could not set core.hooksPath"
+    fi
+
     # --- gh auth (detect only — login is interactive) ---
     if have gh && gh auth status &>/dev/null; then
         ok "gh authenticated"
@@ -225,6 +235,8 @@ doctor() {
         "$([[ -f firmware/instrument/include/secrets.h && -f firmware/receiver/include/secrets.h ]] && echo present || echo MISSING)"
     printf "  %-12s %s\n" "alias" \
         "$(grep -q 'alias kendama-bridge=' "$HOME/.zshrc" 2>/dev/null && echo present || echo MISSING)"
+    printf "  %-12s %s\n" "hooks" \
+        "$(git config --local core.hooksPath 2>/dev/null || echo UNSET)"
 }
 
 # ============================================================================

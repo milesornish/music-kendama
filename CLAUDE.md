@@ -30,3 +30,16 @@ Conventions for working on this repo. Synced via git, so they apply on every mac
 - **Machine-local (never syncs):** `secrets.h`, `.env.local`, `.pio/` cache, compiled bridge binary.
 
 See `docs/multi-machine-workflow.md` for the full daily workflow, serial-port handling, and Ableton coordination.
+
+## Commit hygiene (enforced)
+
+A tracked pre-commit hook (`scripts/git-hooks/`, enabled via `core.hooksPath` — `setup-mac.sh`
+installs it on each machine) **blocks** any commit that adds a secret-like file (`secrets.h`,
+`.env.local`, `*.pem`, `id_rsa`, …), a build artifact (`.pio/`, `*.bin`, the compiled bridge), or
+secret-pattern content (private keys, `AKIA…`, `ghp_…`, a hardcoded `password/token = …`). The
+`*.template` / `*.example` placeholders are allowed — they're meant to sync. A `pre-push` hook
+re-scans the pushed commits as a second gate.
+
+- Genuine false positive → bypass with `git commit --no-verify` (or `git push --no-verify`).
+- Validate the hooks anytime: `bash scripts/git-hooks/selftest.sh` (all cases must pass).
+- `setup-mac.sh --verify` reports `hooks: scripts/git-hooks`; if it shows `UNSET`, run `setup-mac.sh`.

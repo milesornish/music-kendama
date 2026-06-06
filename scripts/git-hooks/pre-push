@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# pre-push — second gate: re-scan the commits being pushed (catches anything committed with
+# --no-verify). git feeds "<localref> <localsha> <remoteref> <remotesha>" lines on stdin.
+set -o pipefail
+HOOK_DIR="$(cd "$(dirname "$0")" && pwd)"
+. "$HOOK_DIR/scan-lib.sh"
+
+ZERO=0000000000000000000000000000000000000000
+EMPTY_TREE=4b825dc642cb6eb9a060e54bf8d69288fbee4904   # git's well-known empty tree
+
+while read -r lref lsha rref rsha; do
+  [ "$lsha" = "$ZERO" ] && continue                     # branch deletion — nothing to scan
+  if [ "$rsha" = "$ZERO" ]; then range="$EMPTY_TREE..$lsha"   # new branch — scan all it introduces
+  else range="$rsha..$lsha"; fi                          # existing branch — scan new commits
+
+  files=()
+  while IFS= read -r f; do [ -n "$f" ] && files+=("$f"); done \
+    < <(git diff --name-only --diff-filter=ACM "$range" 2>/dev/null)
+  if [ ${#files[@]} -gt 0 ]; then scan_filenames "${files[@]}"; fi
+
+  diff=$(git diff -U0 "$range" 2>/dev/null)
+  scan_content <<<"$diff"
+done
+
+if report_findings; then exit 0; else exit 1; fi
