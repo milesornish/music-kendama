@@ -40,8 +40,9 @@ static volatile uint32_t rx_count = 0;   // RX_COUNT_MODE: ESP-NOW receptions si
 static Adafruit_DotStar strip(LED_MAX, DOTSTAR_BGR);  // BGR on this strip: green confirmed on HW, blue unchanged, red inferred from the R/G swap
 static uint16_t led_count = LED_MAX;
 
-// Instrument send pacing (us). Default 10/s; retunable at runtime via OSC_SET_RATE (test).
-static uint32_t send_interval_us = 100000;
+// Instrument send pacing (us). Default 100/s (the working rate, so reboots come up ready);
+// retunable at runtime via OSC_SET_RATE. Higher default = ~5x the radio battery draw vs 10/s.
+static uint32_t send_interval_us = 10000;
 static uint32_t last_send_us = 0;
 
 #ifndef BATCH_N
